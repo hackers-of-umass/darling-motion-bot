@@ -23,9 +23,11 @@ void loop()
 {
   //Data collection
   update();
+ printRaw();
   //State update
-  updateState(getState(0), getState(1), getClamp(0), getClamp(1), getClamp(2));
-  updateAllMotors();
   
-  delay(1);
+  //updateState(getState(0), getState(1), getClamp(0), getClamp(1), getClamp(2));
+  //updateAllMotors();
+  
+  delay(100);
 }

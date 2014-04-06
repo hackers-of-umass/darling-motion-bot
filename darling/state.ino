@@ -5,9 +5,23 @@ State pattern describing the 7 states that up down tilt is handled.
  Handles the bro trigger.
  */
 
+//Safe Range
+int x_lower_safe=-300;
+int x_upper_safe=300;
+
+int y_lower_safe=-350;
+int y_upper_safe=350;
+
+//Danger Level
+int x_upper1=450;
+int x_upper2=850;
+int x_lower1=-450;
+int x_lower2=-850;
+
+
 
 void updateState(int x, int y, boolean c, boolean r, boolean b){
-  if(x<=150 && x>=-150 && y<=550 && y>=-550){
+  if(x<=x_upper_safe && x>=x_lower_safe && y<=y_upper_safe && y>=y_lower_safe){
     setMotorVelocity(LEFT_WRIST, 0);
     setMotorVelocity(RIGHT_WRIST,0);
   }
@@ -20,7 +34,7 @@ void updateState(int x, int y, boolean c, boolean r, boolean b){
 }
 
 void updateX(int x){
-  if(x<=225 && x>=-225){
+  if(x<=x_upper_safe&& x>=x_lower_safe){
     //Neutral
     setMotorVelocity(SHOULDER, 0);
     setMotorVelocity(ELBOW, 0);
@@ -28,7 +42,7 @@ void updateX(int x){
     setMotorVelocity(RIGHT_WRIST,0);
     setMotorVelocity(HAND, 0);
   }
-  else if(x > 225 && x <= 525){
+  else if(x > x_upper_safe && x <= x_upper1){
     //Upper wrist
     setMotorVelocity(SHOULDER,0);
     setMotorVelocity(ELBOW, 0);
@@ -36,7 +50,7 @@ void updateX(int x){
     setMotorVelocity(RIGHT_WRIST, -0.1);
     setMotorVelocity(HAND, 0);
   }
-  else if(x>525 && x<=825){
+  else if(x>x_upper1 && x<=x_upper2){
     //UP1
     setMotorVelocity(ELBOW, 0.2);
     setMotorVelocity(HAND, 0);
@@ -44,7 +58,7 @@ void updateX(int x){
     setMotorVelocity(LEFT_WRIST, 0);
     setMotorVelocity(RIGHT_WRIST,0);
   }
-  else if(x>825){
+  else if(x>x_upper2){
     //UP2
     setMotorVelocity(SHOULDER, -0.08);
     setMotorVelocity(ELBOW, 0);
@@ -52,7 +66,7 @@ void updateX(int x){
     setMotorVelocity(RIGHT_WRIST,0);
     setMotorVelocity(HAND, 0);
   }
-  else if(x < -225 && x >= -425){
+  else if(x < x_lower_safe && x >= x_lower1){
     //Lower wrist
     setMotorVelocity(SHOULDER,0);
     setMotorVelocity(ELBOW, 0);
@@ -60,7 +74,7 @@ void updateX(int x){
     setMotorVelocity(RIGHT_WRIST, 0.1);
     setMotorVelocity(HAND, 0);
   }
-  else if(x<-425 && x>=-825){
+  else if(x<-x_lower1 && x>=x_lower2){
     //DOWN1 
     setMotorVelocity(ELBOW, -0.2);
     setMotorVelocity(SHOULDER, 0);
@@ -68,7 +82,7 @@ void updateX(int x){
     setMotorVelocity(RIGHT_WRIST,0);
     setMotorVelocity(HAND, 0);
   }
-  else if(x<-825){
+  else if(x<-x_lower2){
     //DOWN2
     setMotorVelocity(SHOULDER, 0.08);
     setMotorVelocity(ELBOW, 0);
@@ -87,7 +101,7 @@ void updateX(int x){
 }
 
 void updateY(int y){
-  if(y<=550 && y>=-550){
+  if(y<=350 && y>=-350){
     //Neutral
   }
   else if(y>550 && y<=1000){
@@ -98,7 +112,7 @@ void updateY(int y){
   else if(y>850){
     //LEFT2  
   }
-  else if(y<-550 && y>=-1000){
+  else if(y<-350 && y>=-1000){
     //RIGHT1
     setMotorVelocity(LEFT_WRIST, .10);
     setMotorVelocity(RIGHT_WRIST,.10);

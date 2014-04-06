@@ -59,10 +59,10 @@ boolean getClamp(int n){
 }
 
 void printRaw(){
-  Serial.println(toG(compass.a.x));
-  Serial.println(toG(compass.a.y));
-  Serial.println(toG(compass.a.z));
-  Serial.println(FSR);
+ Serial.println(toG(compass.a.x));
+  //Serial.println(toG(compass.a.y));
+  //Serial.println(toG(compass.a.z));
+  //Serial.println(FSR);
   Serial.println();
 }
 
@@ -74,7 +74,7 @@ void readClamp(int i){
     toClamp=true;
     count++;
   }
-  else if(i>50){
+  else if(i>1){
     toRelax=true;
   }
   else{
