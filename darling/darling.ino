@@ -5,29 +5,32 @@ into robotic arm output.
 
 //Boolean method to establish test lights in 13 12 11 Pins
 boolean test = false;
-//Rate of data collection
 
 /*
 Setup method. Calls other start methods in the other class
 */
 void setup(){
+  
   if(test){
     startTest();
   }
+  
   Serial.begin(9600);
-  startData();
-  startControl();
+
+  startData();//Start the data collection
+  startControl();//Start the controller
 }
 
 void loop()
 {
-  //Data collection
-  update();
- printRaw();
-  //State update
+  /*Data collection*/
+  update();//Update the readings from the sensors
+  printRaw();//Print the raw data for debugging
   
-  //updateState(getState(0), getState(1), getClamp(0), getClamp(1), getClamp(2));
-  //updateAllMotors();
+  /*State update*/
+  updateState(getState(0), getState(1), getClamp(0), getClamp(1), getClamp(2)); //Update to relative state based on reading changes in sensors
+  updateAllMotors(); //Update motors to move the bot
   
-  delay(100);
+  //Short delay to ensure fluidness of motion
+  delay(1);
 }
